@@ -31,6 +31,15 @@ with tab_text:
         result = st.session_state["text_scan_result"]
         st.metric("Privacy risk score", f'{result["score"]}/100', result["level"])
         st.progress(result["score"] / 100)
+
+        if result["score"] >= 70:
+            st.error("🔴 High Risk: Review and protect sensitive information before sharing.")
+        elif result["score"] >= 30:
+            st.warning("🟠 Medium Risk: Check the detected items before sharing.")
+        else:
+            st.success("🟢 Low Risk: Fewer supported sensitive patterns were detected.")
+
+        st.info("Tip: Use the protected text below instead of sharing the original.")
         if result["findings"]:
             st.write("**Detected items**")
             st.dataframe(
@@ -68,6 +77,15 @@ with tab_image:
     if "image_scan_result" in st.session_state:
         result = st.session_state["image_scan_result"]
         st.metric("Privacy risk score", f'{result["score"]}/100', result["level"])
+        st.progress(result["score"] / 100)
+
+        if result["score"] >= 70:
+            st.error("🔴 High Risk: Protect sensitive information before sharing.")
+        elif result["score"] >= 30:
+            st.warning("🟠 Medium Risk: Review detected items before sharing.")
+        else:
+            st.success("🟢 Low Risk: Fewer supported sensitive patterns detected.")
+
         if result["findings"]:
             st.dataframe(
                 [{"Type": f["type"], "Count": f["count"], "Risk": f["risk"]} for f in result["findings"]],
