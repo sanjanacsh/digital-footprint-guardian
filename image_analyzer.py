@@ -33,7 +33,7 @@ def scan_image(image: Image.Image) -> dict:
                 "line": data["line_num"][i],
             })
 
-    # Join words by OCR line, keeping boxes for any line containing a detected pattern.
+  
     grouped = {}
     for word in words:
         key = (word["block"], word["line"])
@@ -65,7 +65,7 @@ def redact_image(image: Image.Image, boxes: list) -> Image.Image:
     protected = image.copy().convert("RGB")
     draw = ImageDraw.Draw(protected)
     for x1, y1, x2, y2 in boxes:
-        # Add a small margin so the detected line is covered more reliably.
+        
         margin = 5
         draw.rectangle(
             (max(0, x1 - margin), max(0, y1 - margin),
