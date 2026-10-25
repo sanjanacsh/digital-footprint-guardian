@@ -124,4 +124,4 @@ Replace `YOUR-USERNAME` with your GitHub username. Never commit passwords, API k
 
 ## Project Demo
 
-[▶ Watch the Project Demo](./project-demo.mp4)
+[▶ Watch the Project Demo](./project-demo.mp4.mp4)
